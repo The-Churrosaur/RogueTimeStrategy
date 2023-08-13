@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf6fss5cyqd2i"]
+
+[ext_resource type="Script" path="res://tests/exportnodesavertest.gd" id="1_0cb2o"]
+[ext_resource type="Script" path="res://tests/exportnodesaverchild.gd" id="2_otyc6"]
+
+[node name="exportnodesavertest" type="Node2D" node_paths=PackedStringArray("holder")]
+script = ExtResource("1_0cb2o")
+holder = NodePath("Node2D")
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("2_otyc6")

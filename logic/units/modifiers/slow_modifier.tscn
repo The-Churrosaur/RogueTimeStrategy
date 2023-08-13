@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c24ue56ux8yv3"]
+
+[ext_resource type="PackedScene" uid="uid://ccych4eh4m4ha" path="res://logic/units/modifiers/unit_modifier.tscn" id="1_74o8h"]
+[ext_resource type="Script" path="res://logic/units/modifiers/slow_modifier.gd" id="2_pohtq"]
+
+[node name="unit_modifier" instance=ExtResource("1_74o8h")]
+script = ExtResource("2_pohtq")
+old_velocity = 0
+slow_velocity = 2

@@ -1,0 +1,46 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://maps/test_map.gd" id="1_4fowi"]
+[ext_resource type="PackedScene" path="res://logic/units/unit_model.tscn" id="2_34f0j"]
+[ext_resource type="Script" path="res://logic/units/unit_model.gd" id="3_j14jq"]
+[ext_resource type="Texture2D" path="res://assets/icon.svg" id="4_g8the"]
+[ext_resource type="PackedScene" path="res://logic/units/unit_controller.tscn" id="5_mo3qv"]
+[ext_resource type="Script" path="res://logic/units/unit_controller.gd" id="6_3kac0"]
+[ext_resource type="PackedScene" path="res://logic/units/modifiers/unit_modifier_manager.tscn" id="7_4hnh5"]
+[ext_resource type="Script" path="res://logic/units/modifiers/unit_modifier_manager.gd" id="8_8k1lk"]
+[ext_resource type="Script" path="res://logic/units/modifiers/slow_modifier.gd" id="9_xwffo"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ff2kq"]
+radius = 32.0
+height = 128.0
+
+[node name="test_map" type="Node2D"]
+script = ExtResource("1_4fowi")
+
+[node name="unit_model" type="CharacterBody2D" parent="." groups=["node_savable"] instance=ExtResource("2_34f0j")]
+position = Vector2(308.299, 308.299)
+script = ExtResource("3_j14jq")
+speed = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="unit_model"]
+scale = Vector2(0.5, 1)
+texture = ExtResource("4_g8the")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="unit_model"]
+shape = SubResource("CapsuleShape2D_ff2kq")
+
+[node name="unit_controller" type="Node" parent="." node_paths=PackedStringArray("unit_model", "unit_turrets", "unit_modifiers", "subordinates") instance=ExtResource("5_mo3qv")]
+script = ExtResource("6_3kac0")
+unit_model = NodePath("../unit_model")
+unit_turrets = []
+unit_modifiers = NodePath("unit_modifier_manager")
+health = 10
+subordinates = []
+
+[node name="unit_modifier_manager" type="Node" parent="unit_controller" instance=ExtResource("7_4hnh5")]
+script = ExtResource("8_8k1lk")
+
+[node name="slow" type="Node2D" parent="unit_controller/unit_modifier_manager"]
+script = ExtResource("9_xwffo")
+old_velocity = 10
+slow_velocity = 2

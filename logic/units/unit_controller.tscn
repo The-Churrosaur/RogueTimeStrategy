@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1asd4m254wvx"]
+
+[ext_resource type="Script" path="res://logic/units/unit_controller.gd" id="1_n5568"]
+[ext_resource type="PackedScene" uid="uid://lh4phgymgqkq" path="res://logic/units/modifiers/unit_modifier_manager.tscn" id="2_76h22"]
+
+[node name="unit_controller" type="Node" node_paths=PackedStringArray("unit_modifiers")]
+script = ExtResource("1_n5568")
+unit_modifiers = NodePath("unit_modifier_manager")
+
+[node name="unit_modifier_manager" parent="." instance=ExtResource("2_76h22")]

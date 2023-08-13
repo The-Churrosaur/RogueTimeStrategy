@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://lh4phgymgqkq"]
+
+[ext_resource type="Script" path="res://logic/units/modifiers/unit_modifier_manager.gd" id="1_2baoc"]
+
+[node name="unit_modifier_manager" type="Node"]
+script = ExtResource("1_2baoc")

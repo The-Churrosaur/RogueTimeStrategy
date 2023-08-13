@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5xj1n6v8hkm1"]
+
+[ext_resource type="Script" path="res://logic/units/detection/unit_vision.gd" id="1_j4hk8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xg2mu"]
+radius = 100.0
+
+[node name="unit_vision" type="Area2D" node_paths=PackedStringArray("refresh_vision_timer")]
+script = ExtResource("1_j4hk8")
+refresh_vision_timer = NodePath("RefreshVisionTimer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xg2mu")
+
+[node name="RefreshVisionTimer" type="Timer" parent="."]

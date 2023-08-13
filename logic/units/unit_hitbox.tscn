@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://3qlu8v5u4stv"]
+
+[ext_resource type="Script" path="res://logic/units/unit_hitbox.gd" id="1_cedut"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kocmy"]
+
+[node name="unit_hitbox" type="Area2D"]
+script = ExtResource("1_cedut")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kocmy")

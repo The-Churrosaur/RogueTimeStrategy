@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c62fwuhhcbqf7"]
+
+[ext_resource type="Script" path="res://logic/ui/unit_selection_tool.gd" id="1_0f67c"]
+[ext_resource type="Texture2D" uid="uid://x8tfbgtyuesw" path="res://assets/icon.svg" id="2_1nibn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_64xte"]
+
+[node name="unit_selection_tool" type="Node2D" node_paths=PackedStringArray("selection_area")]
+script = ExtResource("1_0f67c")
+selection_area = NodePath("Area2D")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_64xte")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_1nibn")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_select_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_select_area_exited"]

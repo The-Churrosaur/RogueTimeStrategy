@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkgc56joefvrq"]
+
+[ext_resource type="Script" path="res://maps/test_map.gd" id="1_1gbvs"]
+[ext_resource type="PackedScene" uid="uid://d1asd4m254wvx" path="res://logic/units/unit_controller.tscn" id="1_aqgm6"]
+[ext_resource type="PackedScene" uid="uid://dub62td32jcun" path="res://logic/units/unit_model.tscn" id="2_y56is"]
+[ext_resource type="PackedScene" uid="uid://c62fwuhhcbqf7" path="res://logic/ui/unit_selection_tool.tscn" id="4_go7gp"]
+
+[node name="test_map" type="Node2D"]
+script = ExtResource("1_1gbvs")
+
+[node name="unit_controller" parent="." node_paths=PackedStringArray("unit_model") instance=ExtResource("1_aqgm6")]
+unit_model = NodePath("unit_model")
+
+[node name="unit_model" parent="unit_controller" instance=ExtResource("2_y56is")]
+
+[node name="unit_selection_area" parent="unit_controller/unit_model" index="2" node_paths=PackedStringArray("unit_controller")]
+unit_controller = NodePath("../..")
+
+[node name="unit_hitbox" parent="unit_controller/unit_model" index="3" node_paths=PackedStringArray("unit_controller")]
+unit_controller = NodePath("../..")
+
+[node name="unit_selection_tool" parent="." instance=ExtResource("4_go7gp")]
+
+[editable path="unit_controller/unit_model"]

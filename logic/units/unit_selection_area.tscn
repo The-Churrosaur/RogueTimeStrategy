@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfeimxax4kqyi"]
+
+[ext_resource type="Script" path="res://logic/units/unit_selection_area.gd" id="1_lq734"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rsdbo"]
+
+[node name="unit_selection_area" type="Area2D"]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("1_lq734")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rsdbo")

@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://dub62td32jcun"]
+
+[ext_resource type="Script" path="res://logic/units/unit_model.gd" id="1_bon3d"]
+[ext_resource type="Texture2D" uid="uid://x8tfbgtyuesw" path="res://assets/icon.svg" id="2_joqi8"]
+[ext_resource type="PackedScene" uid="uid://bfeimxax4kqyi" path="res://logic/units/unit_selection_area.tscn" id="3_jxyok"]
+[ext_resource type="PackedScene" uid="uid://3qlu8v5u4stv" path="res://logic/units/unit_hitbox.tscn" id="4_c70uw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ff2kq"]
+radius = 32.0
+height = 128.0
+
+[node name="unit_model" type="CharacterBody2D" groups=["node_savable"]]
+script = ExtResource("1_bon3d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 1)
+texture = ExtResource("2_joqi8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ff2kq")
+
+[node name="unit_selection_area" parent="." instance=ExtResource("3_jxyok")]
+
+[node name="unit_hitbox" parent="." instance=ExtResource("4_c70uw")]
