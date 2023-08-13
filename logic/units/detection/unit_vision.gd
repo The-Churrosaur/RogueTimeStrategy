@@ -1,12 +1,14 @@
 
 # monitors periodically for unit hitboxes
-# populates list which is ready by controller
+# populates list which is read by controller
 
 class_name UnitVision
 extends Area2D
 
 
+
 # FIELDS ==========
+
 
 
 signal unit_reported(unit : UnitController)
@@ -17,7 +19,9 @@ signal unit_reported(unit : UnitController)
 @export var visible_units : Array[UnitController]
 
 
+
 # PUBLIC =========
+
 
 
 # compares stealth and optics values 
@@ -27,7 +31,13 @@ func can_see(other_unit : UnitController) -> bool:
 	return true
 
 
+
 # PRIVATE ==========
+
+
+
+func _on_refresh_vision_timer():
+	_check_area()
 
 
 func _check_area():
@@ -41,4 +51,7 @@ func _check_area():
 			if can_see(unit):
 				visible_units.append(unit)
 	
-	
+	print("unit vision: ", self, " has vision on:")
+	print(visible_units)
+
+

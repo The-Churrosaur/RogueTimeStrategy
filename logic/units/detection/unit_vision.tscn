@@ -13,3 +13,6 @@ refresh_vision_timer = NodePath("RefreshVisionTimer")
 shape = SubResource("CircleShape2D_xg2mu")
 
 [node name="RefreshVisionTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="RefreshVisionTimer" to="." method="_on_refresh_vision_timer"]

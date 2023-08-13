@@ -10,6 +10,8 @@ extends CharacterBody2D
 
 
 @export var speed = 2
+# how close to the target it has to be before chilling
+@export var position_precision = 1
 
 var move_target : Vector2
 
@@ -34,4 +36,5 @@ func set_target(move_target : Vector2):
 func _move_to_target(target):
 	
 	var to_target : Vector2 = target - position
-	move_and_collide(to_target.normalized() * speed)
+	if (to_target.length() < position_precision): return
+	else: move_and_collide(to_target.normalized() * speed)
