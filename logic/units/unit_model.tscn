@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dub62td32jcun"]
+[gd_scene load_steps=7 format=3 uid="uid://dub62td32jcun"]
 
 [ext_resource type="Script" path="res://logic/units/unit_model.gd" id="1_bon3d"]
 [ext_resource type="Texture2D" uid="uid://x8tfbgtyuesw" path="res://assets/icon.svg" id="2_joqi8"]
 [ext_resource type="PackedScene" uid="uid://bfeimxax4kqyi" path="res://logic/units/unit_selection_area.tscn" id="3_jxyok"]
 [ext_resource type="PackedScene" uid="uid://3qlu8v5u4stv" path="res://logic/units/unit_hitbox.tscn" id="4_c70uw"]
+[ext_resource type="PackedScene" uid="uid://d1asd4m254wvx" path="res://logic/units/unit_controller.tscn" id="5_4rrmn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ff2kq"]
 radius = 32.0
@@ -19,6 +20,11 @@ texture = ExtResource("2_joqi8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ff2kq")
 
-[node name="unit_selection_area" parent="." instance=ExtResource("3_jxyok")]
+[node name="unit_selection_area" parent="." node_paths=PackedStringArray("unit_controller") instance=ExtResource("3_jxyok")]
+unit_controller = NodePath("../unit_controller")
 
-[node name="unit_hitbox" parent="." instance=ExtResource("4_c70uw")]
+[node name="unit_hitbox" parent="." node_paths=PackedStringArray("unit_controller") instance=ExtResource("4_c70uw")]
+unit_controller = NodePath("../unit_controller")
+
+[node name="unit_controller" parent="." node_paths=PackedStringArray("unit_model") instance=ExtResource("5_4rrmn")]
+unit_model = NodePath("..")
