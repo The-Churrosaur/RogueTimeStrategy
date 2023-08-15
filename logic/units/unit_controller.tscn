@@ -8,3 +8,9 @@ script = ExtResource("1_n5568")
 unit_modifiers = NodePath("unit_modifier_manager")
 
 [node name="unit_modifier_manager" parent="." instance=ExtResource("2_76h22")]
+
+[node name="TargetingTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="TargetingTimer" to="." method="_on_targeting_timer"]

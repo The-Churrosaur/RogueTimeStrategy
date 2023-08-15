@@ -16,6 +16,7 @@ extends Node
 @export_category("Model")
 @export var unit_model : UnitModel
 @export var unit_turrets : Array[UnitTurret]
+@export var unit_vision : UnitVision
 
 @export_category("Components")
 @export var unit_modifiers : UnitModifierManager
@@ -57,6 +58,19 @@ func move(target: Vector2):
 # PRIVATE ==========
 
 
-# connect through editor
+# todo connect 
 func _on_unit_hitbox_entered():
 	pass
+
+
+func _on_targeting_timer():
+	_set_targets()
+
+
+func _set_targets():
+	
+	# temp
+	var units = unit_vision.visible_units
+	for turret in unit_turrets:
+		turret.set_target(units.front())
+	

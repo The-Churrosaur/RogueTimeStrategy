@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7x68bod321bx"]
+[gd_scene load_steps=10 format=3 uid="uid://c7x68bod321bx"]
 
 [ext_resource type="PackedScene" uid="uid://dub62td32jcun" path="res://logic/units/unit_model.tscn" id="1_nonqw"]
 [ext_resource type="Texture2D" uid="uid://x8tfbgtyuesw" path="res://assets/icon.svg" id="2_hn6bd"]
@@ -11,6 +11,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y267c"]
 size = Vector2(128, 64)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_880x1"]
+radius = 500.0
+
 [node name="unit_model" instance=ExtResource("1_nonqw")]
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
@@ -20,8 +23,10 @@ texture = ExtResource("2_hn6bd")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 shape = SubResource("RectangleShape2D_y267c")
 
-[node name="unit_controller" parent="." index="2" node_paths=PackedStringArray("unit_model") instance=ExtResource("2_p4giv")]
+[node name="unit_controller" parent="." index="2" node_paths=PackedStringArray("unit_model", "unit_turrets", "unit_vision") instance=ExtResource("2_p4giv")]
 unit_model = NodePath("..")
+unit_turrets = [NodePath("../unit_turret")]
+unit_vision = NodePath("../unit_vision")
 
 [node name="unit_selection_area" parent="." index="3" node_paths=PackedStringArray("unit_controller") instance=ExtResource("3_k0a6q")]
 unit_controller = NodePath("../unit_controller")
@@ -29,9 +34,23 @@ unit_controller = NodePath("../unit_controller")
 [node name="unit_hitbox" parent="." index="4" node_paths=PackedStringArray("unit_controller") instance=ExtResource("4_mcin8")]
 unit_controller = NodePath("../unit_controller")
 
-[node name="unit_vision" parent="." index="5" instance=ExtResource("5_vxwt4")]
+[node name="unit_vision" parent="." index="5" node_paths=PackedStringArray("unit_controller") instance=ExtResource("5_vxwt4")]
+unit_controller = NodePath("../unit_controller")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="unit_vision" index="2"]
+shape = SubResource("CircleShape2D_880x1")
 
 [node name="unit_turret" parent="." index="6" node_paths=PackedStringArray("rotor") instance=ExtResource("6_1ns2b")]
 rotor = NodePath("rot")
 
 [node name="rot" type="Node2D" parent="unit_turret" index="0"]
+
+[node name="Sprite2D" type="Sprite2D" parent="unit_turret/rot" index="0"]
+position = Vector2(37, 0)
+scale = Vector2(0.7, 0.1)
+texture = ExtResource("2_hn6bd")
+
+[node name="Sprite2D2" type="Sprite2D" parent="unit_turret/rot" index="1"]
+position = Vector2(-3, 0)
+scale = Vector2(0.7, 0.5)
+texture = ExtResource("2_hn6bd")

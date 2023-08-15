@@ -13,6 +13,7 @@ extends Area2D
 
 signal unit_reported(unit : UnitController)
 
+@export var unit_controller :UnitController
 @export var refresh_vision_timer : Timer
 
 @export_category("Runtime")
@@ -46,7 +47,7 @@ func _check_area():
 	
 	visible_units.clear()
 	for area in areas:
-		if area is UnitHitbox:
+		if (area is UnitHitbox) and (area.unit_controller != unit_controller) :
 			var unit = area.unit_controller
 			if can_see(unit):
 				visible_units.append(unit)

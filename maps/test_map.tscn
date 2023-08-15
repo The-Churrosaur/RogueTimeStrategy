@@ -14,3 +14,5 @@ position = Vector2(298, 202)
 
 [node name="unit_model2" parent="." instance=ExtResource("3_bkmbr")]
 position = Vector2(1130, 220)
+
+[editable path="unit_model2"]
