@@ -30,7 +30,7 @@ func _input(event):
 	
 	if event.is_action_pressed("ui_rmb"):
 		for unit in selected_units:
-			unit.set_target(get_global_mouse_position())
+			unit.move(get_global_mouse_position())
 			
 
 

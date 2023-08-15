@@ -15,6 +15,7 @@ height = 128.0
 script = ExtResource("1_bon3d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
 scale = Vector2(0.5, 1)
 texture = ExtResource("2_joqi8")
 
@@ -22,6 +23,7 @@ texture = ExtResource("2_joqi8")
 unit_model = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ff2kq")
 
 [node name="unit_selection_area" parent="." node_paths=PackedStringArray("unit_controller") instance=ExtResource("3_jxyok")]

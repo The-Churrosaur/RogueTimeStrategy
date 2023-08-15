@@ -51,7 +51,7 @@ func _check_area():
 			if can_see(unit):
 				visible_units.append(unit)
 	
-	print("unit vision: ", self, " has vision on:")
-	print(visible_units)
+#	print("unit vision: ", self, " has vision on:")
+#	print(visible_units)
 
 

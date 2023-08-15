@@ -28,7 +28,7 @@ extends Node
 
 
 func _ready():
-	unit_model.set_target(Vector2(500,500))
+	pass
 
 
 func _input(event):
@@ -50,8 +50,8 @@ func add_modifier(modifier : UnitModifier):
 	modifier.add_modifier(self)
 
 
-func set_target(target : Vector2):
-	unit_model.set_target(target) 
+func move(target: Vector2):
+	unit_model.rotate_and_move(target)
 
 
 # PRIVATE ==========
