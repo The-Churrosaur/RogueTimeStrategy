@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bkgc56joefvrq"]
 
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_1gbvs"]
-[ext_resource type="PackedScene" uid="uid://dub62td32jcun" path="res://logic/units/unit_model.tscn" id="2_y56is"]
+[ext_resource type="PackedScene" uid="uid://c7x68bod321bx" path="res://logic/units/types/test_unit.tscn" id="3_bkmbr"]
 [ext_resource type="PackedScene" uid="uid://c62fwuhhcbqf7" path="res://logic/ui/unit_selection_tool.tscn" id="4_go7gp"]
 
 [node name="test_map" type="Node2D"]
@@ -9,8 +9,8 @@ script = ExtResource("1_1gbvs")
 
 [node name="unit_selection_tool" parent="." instance=ExtResource("4_go7gp")]
 
-[node name="unit_model" parent="." instance=ExtResource("2_y56is")]
-position = Vector2(725, 253)
+[node name="unit_model" parent="." instance=ExtResource("3_bkmbr")]
+position = Vector2(298, 202)
 
-[node name="unit_model2" parent="." instance=ExtResource("2_y56is")]
-position = Vector2(165, 229)
+[node name="unit_model2" parent="." instance=ExtResource("3_bkmbr")]
+position = Vector2(1130, 220)

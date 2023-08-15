@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bupr0c55an873"]
+
+[ext_resource type="Script" path="res://logic/units/weapons/unit_weapon.gd" id="1_1dbeg"]
+
+[node name="unit_weapon" type="Node2D"]
+script = ExtResource("1_1dbeg")

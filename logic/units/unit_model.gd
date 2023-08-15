@@ -99,28 +99,7 @@ func _move_to_target(target, delta):
 
 func _rotate_to_target(target_rotation, delta):
 	
-	# is there a simpler way to do this???
-	
-	# put current rotation and target rotation in reference frame of 0 to 360
-	
-	var mod_rotation = fmod(rotation, TAU)
-	if mod_rotation < 0: mod_rotation += TAU
-	
-	var mod_target = fmod(target_rotation, TAU)
-	if mod_target < 0: mod_target += TAU
-	
-	# get the three possible distances
-	# (same hemisphere, rotating positive, rotating negative)
-	
-	var a = mod_target - mod_rotation
-	var b = mod_target - mod_rotation - TAU
-	var c = mod_target - mod_rotation + TAU 
-	
-	# use the smallest magnitude of the three as our desired rotation + sign
-	
-	var distances = {abs(a):a, abs(b):b, abs(c):c}
-	
-	var rotation_delta = distances[distances.keys().min()]
+	var rotation_delta = UtilFuncs.shortest_angle_distance(rotation, target_rotation)
 	var rotation_displacement = sign(rotation_delta) * rotation_speed * delta
 	
 	# rotate towards target 
