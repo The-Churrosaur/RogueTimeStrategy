@@ -25,7 +25,6 @@ enum MOVEMENT_STATE {HALTED, MOVING, ROTATING, STEERING}
 
 @export_category("Runtime")
 @export var move_target : Vector2
-@export var rotation_target : float
 @export var movement_state = MOVEMENT_STATE.HALTED
 
 
@@ -38,7 +37,8 @@ func _physics_process(delta):
 	
 	match movement_state:
 		MOVEMENT_STATE.MOVING: _move_to_target(move_target, delta)
-		MOVEMENT_STATE.ROTATING: _rotate_to_target(rotation_target, delta)
+		MOVEMENT_STATE.ROTATING: _rotate_to_target(move_target, delta)
+		MOVEMENT_STATE.STEERING: _steer_to_target(move_target, delta)
 
 
 
@@ -49,12 +49,17 @@ func _physics_process(delta):
 func rotate_and_move(target : Vector2):
 	
 	move_target = target
-	rotation_target = position.angle_to_point(target)
-	
-	print("unit: moving to: ", target)
-	print("rotation: ", rotation, ", ", rotation_target)
 	
 	_set_rotating()
+	await target_rotation_reached
+	_set_moving()
+
+
+func steer_and_move(target : Vector2):
+	
+	move_target = target
+	
+	_set_steering()
 	await target_rotation_reached
 	_set_moving()
 
@@ -79,6 +84,10 @@ func _set_rotating():
 	movement_state = MOVEMENT_STATE.ROTATING
 
 
+func _set_steering():
+	movement_state = MOVEMENT_STATE.STEERING
+
+
 # -- MOVMENT TIMESTEP FUNCTIONS
 
 
@@ -97,7 +106,9 @@ func _move_to_target(target, delta):
 		emit_signal("target_position_reached")
 
 
-func _rotate_to_target(target_rotation, delta):
+func _rotate_to_target(target, delta):
+	
+	var target_rotation = global_position.angle_to_point(target)
 	
 	var rotation_delta = UtilFuncs.shortest_angle_distance(rotation, target_rotation)
 	var rotation_displacement = sign(rotation_delta) * rotation_speed * delta
@@ -111,3 +122,7 @@ func _rotate_to_target(target_rotation, delta):
 		_set_halt()
 		emit_signal("target_rotation_reached")
 
+
+func _steer_to_target(target, delta):
+	_rotate_to_target(target, delta)
+	move_and_collide(transform.x * speed)

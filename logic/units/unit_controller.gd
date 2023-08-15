@@ -52,7 +52,7 @@ func add_modifier(modifier : UnitModifier):
 
 
 func move(target: Vector2):
-	unit_model.rotate_and_move(target)
+	unit_model.steer_and_move(target)
 
 
 # PRIVATE ==========

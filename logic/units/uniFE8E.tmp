@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dub62td32jcun"]
+
+[ext_resource type="Script" path="res://logic/units/unit_model.gd" id="1_bon3d"]
+
+[node name="unit_model" type="CharacterBody2D" groups=["node_savable"]]
+script = ExtResource("1_bon3d")
