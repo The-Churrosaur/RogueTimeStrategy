@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://1yrihxmwgdlb"]
+
+[ext_resource type="Script" path="res://logic/ui/ui_command/command_line_spawner.gd" id="1_rhxrv"]
+[ext_resource type="PackedScene" uid="uid://dquc3xmx3dnv0" path="res://logic/ui/ui_command/ui_command_line.tscn" id="2_uxoab"]
+
+[node name="command_line_spawner" type="Node2D"]
+script = ExtResource("1_rhxrv")
+line2D_template = ExtResource("2_uxoab")

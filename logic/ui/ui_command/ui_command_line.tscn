@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dquc3xmx3dnv0"]
+
+[node name="ui_command_line" type="Line2D"]
+points = PackedVector2Array(0, 0, 0, 0)
+default_color = Color(0, 0.733333, 0, 1)

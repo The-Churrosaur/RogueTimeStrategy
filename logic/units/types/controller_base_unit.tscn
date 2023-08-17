@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ehoifh8u2lsp"]
+[gd_scene load_steps=11 format=3 uid="uid://ehoifh8u2lsp"]
 
 [ext_resource type="PackedScene" uid="uid://d1asd4m254wvx" path="res://logic/units/unit_controller.tscn" id="1_mc7um"]
 [ext_resource type="PackedScene" uid="uid://dub62td32jcun" path="res://logic/units/unit_model.tscn" id="2_eiqu5"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://3qlu8v5u4stv" path="res://logic/units/unit_hitbox.tscn" id="5_qiso7"]
 [ext_resource type="PackedScene" uid="uid://b5xj1n6v8hkm1" path="res://logic/units/detection/unit_vision.tscn" id="6_3urrb"]
 [ext_resource type="PackedScene" uid="uid://dnktvedtuoan0" path="res://logic/units/turrets/unit_turret.tscn" id="7_hahog"]
+[ext_resource type="PackedScene" uid="uid://1yrihxmwgdlb" path="res://logic/ui/ui_command/command_line_spawner.tscn" id="8_3rnky"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2a743"]
 size = Vector2(128, 64)
@@ -54,3 +55,6 @@ texture = ExtResource("3_hx4ga")
 position = Vector2(-3, 0)
 scale = Vector2(0.7, 0.5)
 texture = ExtResource("3_hx4ga")
+
+[node name="command_line_spawner" parent="." index="3" node_paths=PackedStringArray("unit_controller") instance=ExtResource("8_3rnky")]
+unit_controller = NodePath("..")

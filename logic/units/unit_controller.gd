@@ -13,8 +13,9 @@ extends Node
 # FIELDS ==========
 
 
-@export_category("Debug")
+@export_category("Debug/Editor")
 @export var starting_pos = Vector2.ZERO
+@export var starting_subordinates : Array[UnitController]
 
 @export_category("Model")
 @export var unit_model : UnitModel
@@ -25,7 +26,7 @@ extends Node
 @export var unit_modifiers : UnitModifierManager
 @export var health = 10
 @export var stealth = 0.9
-@export var subordinates : Array[UnitController]
+@export var subordinates = {} # unit, true - assume typed unitcontrollers
 @export var formation : UnitFormation
 
 
@@ -34,6 +35,8 @@ extends Node
 
 func _ready():
 	unit_model.position = starting_pos
+	for unit in starting_subordinates:
+		subordinates[unit] = true
 
 
 func _input(event):
@@ -63,6 +66,21 @@ func move(target: Vector2):
 	unit_model.steer_and_move()
 
 
+func try_add_subordinate(unit : UnitController):
+	if subordinates.has(unit): 
+		return false
+	else:
+		subordinates[unit] = true
+		return true
+
+
+func try_remove_subordinate(unit : UnitController):
+	if subordinates.has(unit):
+		subordinates.erase(unit)
+		return true
+	else:
+		return false
+
 
 # PRIVATE ==========
 
@@ -88,8 +106,8 @@ func _move_formation(target : Vector2):
 	formation.rotation = unit_model.position.angle_to_point(target)
 
 func _set_subordinate_move_targets():
-	for i in subordinates.size():
-		var model = subordinates[i].unit_model
+	for i in subordinates.keys().size():
+		var model = subordinates.keys()[i].unit_model
 		model.set_target(formation.unit_nodes[i])
 		model.follow_target()
 

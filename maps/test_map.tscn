@@ -13,8 +13,8 @@ script = ExtResource("1_1gbvs")
 
 [node name="player_camera" parent="." instance=ExtResource("5_2dy33")]
 
-[node name="unit_controller" parent="." node_paths=PackedStringArray("subordinates", "formation") instance=ExtResource("6_duvhx")]
-subordinates = [NodePath("../unit_controller2"), NodePath("../unit_controller3")]
+[node name="unit_controller" parent="." node_paths=PackedStringArray("starting_subordinates", "formation") instance=ExtResource("6_duvhx")]
+starting_subordinates = [NodePath("../unit_controller2"), NodePath("../unit_controller3")]
 formation = NodePath("formation_echelon")
 
 [node name="formation_echelon" parent="unit_controller" instance=ExtResource("4_3fque")]
