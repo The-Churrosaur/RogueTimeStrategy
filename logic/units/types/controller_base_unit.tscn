@@ -58,3 +58,6 @@ texture = ExtResource("3_hx4ga")
 
 [node name="command_line_spawner" parent="." index="3" node_paths=PackedStringArray("unit_controller") instance=ExtResource("8_3rnky")]
 unit_controller = NodePath("..")
+
+[connection signal="subordinate_added" from="." to="command_line_spawner" method="_on_controller_subordinates_changed"]
+[connection signal="subordinate_removed" from="." to="command_line_spawner" method="_on_controller_subordinates_changed"]

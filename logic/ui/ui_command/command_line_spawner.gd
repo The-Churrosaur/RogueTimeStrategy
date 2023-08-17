@@ -6,7 +6,9 @@ class_name CommandLineSpawner
 extends Node2D
 
 
+
 # FIELDS ==========
+
 
 
 @export var unit_controller : UnitController
@@ -16,19 +18,24 @@ extends Node2D
 @export var lines : Array[Line2D]
 
 
+
 # CALLBACKS ==========
 
 
-func _process(delta):
-	
-	# TEMP TODO
+
+func _ready():
 	setup_lines()
+
+
+func _process(delta):
 	
 	# draw the lines
 	_draw_lines()
 
 
+
 # PUBLIC ==========
+
 
 
 func setup_lines():
@@ -42,7 +49,9 @@ func setup_lines():
 		lines.append(line)
 
 
+
 # PRIVATE ==========
+
 
 
 func _draw_lines():
@@ -53,3 +62,7 @@ func _draw_lines():
 		var line = lines[i]
 		line.set_point_position(0, pos_a)
 		line.set_point_position(1, pos_b)
+
+
+func _on_controller_subordinates_changed(subordinate):
+	setup_lines()

@@ -13,6 +13,9 @@ extends Node
 # FIELDS ==========
 
 
+signal subordinate_added(subordinate : UnitController)
+signal subordinate_removed(subordinate : UnitController)
+
 @export_category("Debug/Editor")
 @export var starting_pos = Vector2.ZERO
 @export var starting_subordinates : Array[UnitController]
@@ -36,7 +39,7 @@ extends Node
 func _ready():
 	unit_model.position = starting_pos
 	for unit in starting_subordinates:
-		subordinates[unit] = true
+		try_add_subordinate(unit)
 
 
 func _input(event):
@@ -53,9 +56,15 @@ func _input(event):
 # PUBLIC ==========
 
 
+# -- MODIFIERS
+
+
 func add_modifier(modifier : UnitModifier):
 	unit_modifiers.add_child(modifier)
 	modifier.add_modifier(self)
+
+
+# -- MOVEMENT
 
 
 func move(target: Vector2):
@@ -66,20 +75,26 @@ func move(target: Vector2):
 	unit_model.steer_and_move()
 
 
+# -- SUBORDINATES
+
+
 func try_add_subordinate(unit : UnitController):
 	if subordinates.has(unit): 
 		return false
 	else:
 		subordinates[unit] = true
+		emit_signal("subordinate_added", unit)
 		return true
 
 
 func try_remove_subordinate(unit : UnitController):
 	if subordinates.has(unit):
 		subordinates.erase(unit)
+		emit_signal("subordinate_removed", unit)
 		return true
 	else:
 		return false
+
 
 
 # PRIVATE ==========
@@ -104,6 +119,7 @@ func _set_targets():
 func _move_formation(target : Vector2):
 	formation.position = target
 	formation.rotation = unit_model.position.angle_to_point(target)
+
 
 func _set_subordinate_move_targets():
 	for i in subordinates.keys().size():
