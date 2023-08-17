@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://ehoifh8u2lsp"]
+
+[ext_resource type="PackedScene" uid="uid://d1asd4m254wvx" path="res://logic/units/unit_controller.tscn" id="1_mc7um"]
+[ext_resource type="PackedScene" uid="uid://dub62td32jcun" path="res://logic/units/unit_model.tscn" id="2_eiqu5"]
+[ext_resource type="Texture2D" uid="uid://x8tfbgtyuesw" path="res://assets/icon.svg" id="3_hx4ga"]
+[ext_resource type="PackedScene" uid="uid://bfeimxax4kqyi" path="res://logic/units/unit_selection_area.tscn" id="4_xaywg"]
+[ext_resource type="PackedScene" uid="uid://3qlu8v5u4stv" path="res://logic/units/unit_hitbox.tscn" id="5_qiso7"]
+[ext_resource type="PackedScene" uid="uid://b5xj1n6v8hkm1" path="res://logic/units/detection/unit_vision.tscn" id="6_3urrb"]
+[ext_resource type="PackedScene" uid="uid://dnktvedtuoan0" path="res://logic/units/turrets/unit_turret.tscn" id="7_hahog"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2a743"]
+size = Vector2(128, 64)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_752kj"]
+radius = 500.0
+
+[node name="unit_controller" node_paths=PackedStringArray("unit_model", "unit_turrets", "unit_vision") instance=ExtResource("1_mc7um")]
+unit_model = NodePath("unit_model")
+unit_turrets = [NodePath("unit_model/unit_turret")]
+unit_vision = NodePath("unit_model/unit_vision")
+
+[node name="unit_model" parent="." index="2" instance=ExtResource("2_eiqu5")]
+
+[node name="Sprite2D" type="Sprite2D" parent="unit_model" index="0"]
+scale = Vector2(1, 0.5)
+texture = ExtResource("3_hx4ga")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="unit_model" index="1"]
+shape = SubResource("RectangleShape2D_2a743")
+
+[node name="unit_selection_area" parent="unit_model" index="2" node_paths=PackedStringArray("unit_controller") instance=ExtResource("4_xaywg")]
+unit_controller = NodePath("../..")
+
+[node name="unit_hitbox" parent="unit_model" index="3" node_paths=PackedStringArray("unit_controller") instance=ExtResource("5_qiso7")]
+unit_controller = NodePath("../..")
+
+[node name="unit_vision" parent="unit_model" index="4" node_paths=PackedStringArray("unit_controller") instance=ExtResource("6_3urrb")]
+unit_controller = NodePath("../..")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="unit_model/unit_vision" index="2"]
+shape = SubResource("CircleShape2D_752kj")
+
+[node name="unit_turret" parent="unit_model" index="5" node_paths=PackedStringArray("rotor") instance=ExtResource("7_hahog")]
+rotor = NodePath("rot")
+
+[node name="rot" type="Node2D" parent="unit_model/unit_turret" index="0"]
+
+[node name="Sprite2D" type="Sprite2D" parent="unit_model/unit_turret/rot" index="0"]
+position = Vector2(37, 0)
+scale = Vector2(0.7, 0.1)
+texture = ExtResource("3_hx4ga")
+
+[node name="Sprite2D2" type="Sprite2D" parent="unit_model/unit_turret/rot" index="1"]
+position = Vector2(-3, 0)
+scale = Vector2(0.7, 0.5)
+texture = ExtResource("3_hx4ga")

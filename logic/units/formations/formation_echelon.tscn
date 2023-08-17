@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://0wylku1hjpvx"]
+
+[ext_resource type="PackedScene" uid="uid://d4b5gc2j4d1q1" path="res://logic/units/formations/unit_formation.tscn" id="1_1pj0w"]
+[ext_resource type="Texture2D" uid="uid://x8tfbgtyuesw" path="res://assets/icon.svg" id="2_twll6"]
+
+[node name="formation_echelon" node_paths=PackedStringArray("unit_nodes") instance=ExtResource("1_1pj0w")]
+unit_nodes = [NodePath("Node2D2"), NodePath("Node2D3"), NodePath("Node2D4"), NodePath("Node2D5")]
+
+[node name="Node2D2" type="Node2D" parent="." index="0"]
+position = Vector2(-176, 389)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D2" index="0"]
+visible = false
+texture = ExtResource("2_twll6")
+
+[node name="Node2D3" type="Node2D" parent="." index="1"]
+position = Vector2(-138, -418)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D3" index="0"]
+visible = false
+texture = ExtResource("2_twll6")
+
+[node name="Node2D4" type="Node2D" parent="." index="2"]
+position = Vector2(-473, 852)
+
+[node name="Node2D5" type="Node2D" parent="." index="3"]
+position = Vector2(-561, -939)

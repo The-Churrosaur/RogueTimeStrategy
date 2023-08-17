@@ -1,18 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://bkgc56joefvrq"]
+[gd_scene load_steps=6 format=3 uid="uid://bkgc56joefvrq"]
 
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_1gbvs"]
-[ext_resource type="PackedScene" uid="uid://c7x68bod321bx" path="res://logic/units/types/test_unit.tscn" id="3_bkmbr"]
+[ext_resource type="PackedScene" uid="uid://0wylku1hjpvx" path="res://logic/units/formations/formation_echelon.tscn" id="4_3fque"]
 [ext_resource type="PackedScene" uid="uid://c62fwuhhcbqf7" path="res://logic/ui/unit_selection_tool.tscn" id="4_go7gp"]
+[ext_resource type="PackedScene" uid="uid://dolucfm0bvul4" path="res://logic/ui/player_camera.tscn" id="5_2dy33"]
+[ext_resource type="PackedScene" uid="uid://ehoifh8u2lsp" path="res://logic/units/types/controller_base_unit.tscn" id="6_duvhx"]
 
 [node name="test_map" type="Node2D"]
 script = ExtResource("1_1gbvs")
 
 [node name="unit_selection_tool" parent="." instance=ExtResource("4_go7gp")]
 
-[node name="unit_model" parent="." instance=ExtResource("3_bkmbr")]
-position = Vector2(298, 202)
+[node name="player_camera" parent="." instance=ExtResource("5_2dy33")]
 
-[node name="unit_model2" parent="." instance=ExtResource("3_bkmbr")]
-position = Vector2(1130, 220)
+[node name="unit_controller" parent="." node_paths=PackedStringArray("subordinates", "formation") instance=ExtResource("6_duvhx")]
+subordinates = [NodePath("../unit_controller2"), NodePath("../unit_controller3")]
+formation = NodePath("formation_echelon")
 
-[editable path="unit_model2"]
+[node name="formation_echelon" parent="unit_controller" instance=ExtResource("4_3fque")]
+
+[node name="unit_controller2" parent="." instance=ExtResource("6_duvhx")]
+starting_pos = Vector2(500, 0)
+
+[node name="unit_controller3" parent="." instance=ExtResource("6_duvhx")]
+starting_pos = Vector2(500, 500)

@@ -4,3 +4,4 @@
 
 [node name="unit_model" type="CharacterBody2D" groups=["node_savable"]]
 script = ExtResource("1_bon3d")
+rotation_speed = 2.0

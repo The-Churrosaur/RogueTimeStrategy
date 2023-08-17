@@ -13,6 +13,9 @@ extends Node
 # FIELDS ==========
 
 
+@export_category("Debug")
+@export var starting_pos = Vector2.ZERO
+
 @export_category("Model")
 @export var unit_model : UnitModel
 @export var unit_turrets : Array[UnitTurret]
@@ -23,13 +26,14 @@ extends Node
 @export var health = 10
 @export var stealth = 0.9
 @export var subordinates : Array[UnitController]
+@export var formation : UnitFormation
 
 
 # CALLBACKS ==========
 
 
 func _ready():
-	pass
+	unit_model.position = starting_pos
 
 
 func _input(event):
@@ -52,7 +56,12 @@ func add_modifier(modifier : UnitModifier):
 
 
 func move(target: Vector2):
-	unit_model.steer_and_move(target)
+	unit_model.set_target(target)
+	if formation != null: 
+		_move_formation(target)
+		_set_subordinate_move_targets()
+	unit_model.steer_and_move()
+
 
 
 # PRIVATE ==========
@@ -68,9 +77,19 @@ func _on_targeting_timer():
 
 
 func _set_targets():
-	
 	# temp
 	var units = unit_vision.visible_units
 	for turret in unit_turrets:
 		turret.set_target(units.front())
-	
+
+
+func _move_formation(target : Vector2):
+	formation.position = target
+	formation.rotation = unit_model.position.angle_to_point(target)
+
+func _set_subordinate_move_targets():
+	for i in subordinates.size():
+		var model = subordinates[i].unit_model
+		model.set_target(formation.unit_nodes[i])
+		model.follow_target()
+
